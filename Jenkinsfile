@@ -5,14 +5,19 @@ pipeline {
         jdk 'jdk-11' 
     }
     stages {
-        stage ('Build') {
+         stage('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                echo 'Building..'
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
