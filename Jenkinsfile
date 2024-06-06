@@ -6,14 +6,6 @@ pipeline {
 	}
 
 	stages {
-                stage("checkout from github"){
-              steps{
-                git branch: 'main',
-                url:'https://github.com/Abhi-Cod/spring-boot-webflux-jjwt.git'
-                echo 'pulled from github successfully'
-                }
-            }
-
 		stage('Build'){
 			steps {
 				bat "mvn clean install -DskipTests"
