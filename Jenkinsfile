@@ -47,4 +47,23 @@ pipeline {
 			}
 		}
 	}
+        
+     post {
+        always {
+            bat 'echo "Cleaning up..."'
+        }
+        
+        success {
+            mail to: 'avishekup@gmail.com',
+                 subject: 'Pipeline Succeeded',
+                 body: 'Your Jenkins Pipeline has completed successfully.'
+        }
+        
+        failure {
+            mail to: 'avishekup@gmail.com',
+                 subject: 'Pipeline Failed',
+                 body: 'Your Jenkins Pipeline has failed. Please investigate.'
+        }
+    }
+
 }
