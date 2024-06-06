@@ -6,6 +6,7 @@ pipeline {
 	}
 
 	stages {
+
 		stage('Build'){
 			steps {
 				bat "mvn clean install -DskipTests"
@@ -17,12 +18,18 @@ pipeline {
 				bat "mvn test"
 			}
 		}
+       
+                stage("code review to check quality of code"){
+                       steps{
+                             bat "mvn pmd:pmd"
+                        }
+               }
 		
 		stage('Sanity check') {
-            steps {
-                input "Does the staging environment look ok?"
-               }
-            }
+           		 steps {
+               			 input "Does the staging environment look ok?"
+              	       }
+              }
 
 		stage('Deploy') {
 			steps {
