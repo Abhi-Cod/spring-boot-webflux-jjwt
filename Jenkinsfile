@@ -1,12 +1,8 @@
 pipeline {
 	agent any
-
-	environment {
-		mavenHome = tool 'maven-3'
-	}
-
 	tools {
-		jdk 'jdk-11'
+                maven 'maven-3' 
+		jdk 'java-11'
 	}
 
 	stages {
