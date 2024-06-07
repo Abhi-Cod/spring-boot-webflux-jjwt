@@ -2,9 +2,8 @@ pipeline {
 	agent any
 	tools {
                 maven 'maven-3' 
-		jdk 'jdk-11'
+		jdk 'jdk-17'
 	}
-
 	stages {
                 stage('Clean Workspace') {
             steps {
@@ -16,6 +15,16 @@ pipeline {
                 checkout scm
             }
         }
+	stage('Sonarqube analysis') {
+         steps {
+          script {
+            scannerHome = tool 'SonarScanner';
+          }
+            withSonarQubeEnv('sonarqube-10.5.1.90531') {
+            bat "${scannerHome}/sonar-scanner.bat" 
+           }
+         }
+       }
 
 		stage('Build'){
 			steps {
